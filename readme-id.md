@@ -13,8 +13,8 @@ saya akan memberikan beberapa point menarik bagaimana caranya kita menulis `sour
 #### [`Point 0 : Pondasi itu harus diperkuat`](#point-0️⃣)
 Memahami Konsep dasar adalah cara untuk memperkuat pondasi dalam bahasa. ini mencangkup sintaks, variabel, tipe data, struktur kontrol dan memahami tentang Object-Oriented Programming (OOP). Memahami PHP secara mendalam membantu untuk menulis kode secara efisien dan mudah dibaca dan dipelihara
 
-#### [`Point 1 : Ikuti Coding Standart yang ada`](#)
-asdasdasd
+#### [`Point 1 : Ikuti Coding Standart yang ada`](#point-1️⃣---ikuti-coding-standart-yang-ada)
+Coding Standart adalah pedoman dan aturan penulisan source code yang konsisten. mengikuti standart penulisan source code membantu memperbaiki kerentanan, meningkatkan kerjasama tim, dan meningkatkan keterbacaan kode. 
 
 #### [`Point 2 : Gunakan Version Control System untuk kerjasama`](#)
 asdasdasd
@@ -34,7 +34,7 @@ asdasdasd
 #### [`Point 7 : Bonus Tips`](#)
 asdasdasd
 
-# Point 0️⃣
+# Point 0️⃣ - Pondasi itu harus diperkuat
 Memahami Konsep dasar adalah cara untuk memperkuat pondasi dalam bahasa. ini mencangkup sintaks, variabel, tipe data, struktur kontrol dan memahami tentang Object-Oriented Programming (OOP). Memahami PHP secara mendalam membantu untuk menulis kode secara efisien dan mudah dibaca dan dipelihara
 
 Point penting:
@@ -457,16 +457,209 @@ echo $kambing->Beranak();
 <details><summary>© <b>Credits & read-more</b></summary>
   1. <a href='https://primakara.ac.id/blog/info-teknologi/php-adalah'>primakara.ac.id - Apa itu PHP? Kenali Bahasa Pemrograman & Fungsinya</a>
   <br/>
-  2. <a href="https://www.malasngoding.com/php-oop-pewarisan-sifat-inheritance-pada-oop-php/"> Malasngoding.com - PHP OOP
+  2. <a href="https://www.malasngoding.com/php-oop-pewarisan-sifat-inheritance-pada-oop-php/"> Malasngoding.com - PHP OOP</a>
   <br/>
-  3. <a href="https://medium.easyread.co/php-series-tipe-data-7d389bd5d5eb">Medium.com - Jansutris Apriten Purba - PHP Series Tipe Data
+  3. <a href="https://medium.easyread.co/php-series-tipe-data-7d389bd5d5eb">Medium.com - Jansutris Apriten Purba - PHP Series Tipe Data </a>
 </details>
 
          
 <br/>
 <!-- end Variabel & tipe data -->
 
-# Point 1️⃣
+# Point 1️⃣ - Ikuti Coding Standart yang ada
+
+Coding standards atau standar penulisan kode, adalah separangkat aturan dan pedoman yang memandu cara penulsan kode dalam suatu proyek. Hal ini sangat membantu memastikan konsistensi, kerapihan, dan kejelasan dalam kode. </br>
+
+Standar coding menjadi penting ketika proyek melibatkan kolaborasi tim, karena memudahkan pemahaman dan perawatan code
+
+### Apa itu PSR-4?
+
+PSR-4 (PHP Standard Recommendation 4) adalah sebuah standar yang dikeluarkan oleh PHP Framework Interoperability Group (PHP-FIG) untuk menetapkan strukut direktori dan penamaan namespace pada proyek. PHP PSR-4 bertujuan untuk menciptakan konsistensi dalam penulsan kode yang lebih baik antara komponen-komponen yang dikembangkan oleh berbagai pihak.
+
+Point-Point penting:
+
+1. Namespace dan Struktur Direktori
+    * PSR-4 mengikuti aturan bahwa setiap namespace dalam proyek PHP harus sesuai dengan struktur direktori yang konsisten. ini membantu memudahkan pencarian kelas dan memahami hubungan antara kelas-kelas.
+2. Root Namespace
+    * PSR-4 menetapkan bahwa setiap proyek PHP harus memiliki "root namespace" sebagai bagian dari namespace kelas-kelasnya. Root namespace ini biasanya mencerminkan vendor atau penulis kode.
+3. Penamaan Kelas dan Berkaitan dengan Namespace :
+    * Nama kelas harus mencerminkan lokasi file di dalam struktur direktori. Misalnya, 
+    ```
+    'NamaProjek\SubNamespace\KelasSaya' 
+    ```
+    harus ditempatkan di dalam direktori
+    ```
+    'NamaProjek/SubNamespace/KelasSaya.php'
+    ```
+4. Autoloading
+    * PSR-4 mendukung konsep autoloading, yaitu proses di mana PHP secara otomatis memuat kelas yang dibutuhkan tanpa perlu menyertakan file secara manual. Ini memudahkan manajemen dependensi dan pengembangan.
+5. Vendor Namespace
+    * Namespace yang berkaitan dengan vendor (Penulis kode atau organisasi) sebaiknya dimulai dengan nama vendor.
+
+    Contohnya, jika vendor adalah "laravel", maka namespace kelas dapat dimulai dengan `laravel\NamaspaceKhusus`        
+<br/>
+
+### Bagaimana contoh implementasi menggunakan PSR-4
+
+Bagi yang mengimplementasikan OOP ketika menulis kode PHP, pasti tidak asing dengan implementasi pemanggilan kelas di file yang berbeda. Biasanya file yang berisi kelas tersebut dipanggil menggunakan `require` atau `include`
+Contohnya :
+
+```php
+<?php
+    include('Foo.php');
+    include('Bar.php');
+
+    $foo = new Foo();
+    $foo->someFunction();
+
+    $bar = new Bar();
+    $bar->anotherFunction();
+?>
+```
+
+tetapi dengan semakin berkembangnya aplikasi yang kita buat, kita memerlukan sebuah cara agar file file kelas yang kita punya bisa terorganisir dengan baik. 
+
+selain itu, semkin modular fungsi-fungsi yang kita punya, maka kebutuhan untuk memanggil class di file yang berbeda akan semakin besar. Ada kalanya kita perlu memanggil lebih dari 10 class yang berbeda ketika kita ingin mengerjakan sebuah fitur. adakah cara agar kita tidak perlu menulis `include` atau `require` berulang kali?
+
+ternyata, kita bisa memanfaatkan salah satu magic method yang ada di PHP yaitu `__autoload`
+
+Berikut adalah contoh pemakaian `__autoload` untuk memuatkan file-file yang berisi kelas secara otomatis. 
+
+untuk kali ini, kita akan mencoba untuk memanggil 2 kelas, yaitu `Foo` dan `Bar` via `__autoload`
+
+Contoh Class Foo.php
+```php
+<?php 
+    class Foo
+    {
+        public function someFunction()
+        {
+            echo "Calling ". __FUNCTION__ ."() in class ". __CLASS__ ."\n";
+        }
+    }
+```
+
+Contoh class Bar.php
+```php
+<?php
+    class Bar
+    {
+        public function anotherFunction()
+        {
+            echo "Calling ". __FUNCTION__ ."() in class ". __CLASS__ ."\n";            
+        }
+    }
+?>
+```
+
+Contoh class __autoload
+```php
+<?php
+function __autoload($class)
+{
+    $file = $class . ".php";
+    if (is_readable($file)){
+        require $file;
+    }
+}
+
+$foo = new Foo();
+$foo->someFunction();
+
+$bar = new Bar();
+$bar->anotherFunction();
+?>
+```
+
+dan Hasilnya adalah :
+
+```
+Calling someFunction() in class Fo
+Calling anotherFunction() in class Bar
+```
+
+Dengan memakai `__autoload`, kita tidak perlu lagi memasukan file berisi class satu persatu, namun cukup dengan menginisialisasikan kelas dan PHP secara otomatis akan mengenali nama kelas dan mencari file yang memiliki nama yang sama dengan kelas tersebut. 
+
+`is_readable()` diperlukan untuk memastikan file tersebut ada dan memiliki hak akses untuk dapat dibaca oleh kode yang memanggilnya
+
+### Standarisasi dengan PSR-4
+
+_Autoloading_ adalah ide yang sangat bagus. tapi dampaknya adalah setiap orang memiliki caranya sendiri untuk melakukan _autoload_. 
+
+untuk itu perlu dibuat sebuah standar bagu _autoloader_, dengan mengikuti aturan yang disebut dengan PSR-4 (Perbaikan dari PSR-0 yang telah _deprecated_, awalnya standarissasi _autolaoader_ menggunakan PSR-0).
+
+PSR-4 mewajibkan menggunakan _Fully Qualified Class Name_ (FQCN) dan memiliki _top-level namespace_ atau vendor namespace
+
+Namespace adalah fitur yang diperkenalkan di PHP 5.3. namespace adalah _Virtual Directory_ yang merepresentasikan _directory_ yang sebenarnya. Sebuah FQCN terdiri dari sekumpulan namespace dan memiliki bentuk seperti ini
+
+```
+\<NamespaceName>(\<SubNamespaceNames>)*\<ClassName>
+```
+
+conthnya, kita memiliki file dengan namespace Vehicle\Car\Honda\Jazz, Vehicle\Car\Honda\HRV dan Vehicle\Car\Toyota\Yaris. maka diasumsikan project ini memiliki struktur directory:
+
+```
+-- Vehicle
+   - Car
+     - Honda
+       - Jazz.php
+       - HRV.php
+     - Toyota
+       - Yaris.php
+```
+
+### Mengapa Mengikuti Coding Standards
+
+1. **Kegunaan**
+    1. Memastikan konsistensi gaya kode di seluruh proyek.
+    2. Meningkatkan kerjasama tim dengan memberikan panduan yang jelas
+    3. Mempermudah pemeliharaan dan pembacaan kode.
+2. **Kesalahan Umum**
+    1. Menulis kode tanpa mengikuti aturan, menyebabkan kode sulit dipahami.
+3. **Solusi**
+    1. Belajar lalu terapkan standar coding yang diterima dan lakukan check source code secara berkala, kalau bisa silahkan refactor source code yang tidak menerapkan standart coding agar mempermudah programmer membaca dan memperbaiki code.
+
+### Keuntungan PSR-4
+
+* Konsistensi
+    * Standar ini menciptakan konsistensi dalam struktur direktori dan namespace. memudahkan developer dalam memahami dan kolaborasi project
+
+* Interoperabilitas
+    * PSR-4 memungkinkan komponen-komponen dari berbagai pihak untuk bekerja bersama tanpa kesulitan dalam pengangan namespace.
+
+* Autoloading
+    * Mempermudah penggunaan _autoloading_, menghilangkan kebutuhan untuk menyertakan manual setiap file kelas.
+
+### Contoh Coding Standards yang umum selain PSR-4
+1. **Penanaman Variabel**
+    - ✅ Do : Gunakan nama variabel yang jelas dan deskriptif, hindari singkatan yang tidak jelas.
+    - 🚫 Don't : Menggunakan singkatan yang tidak dimengerti developer atau nama variabel yang tidak deskriptif dan sulit dipahami
+    
+2. **Indentasi**
+    - ✅ Do : Pilih salah satu metode (biasanya spasi), terapkan secara konsisten dan terapkan di tetapnya
+    - 🚫 Don't : Menggunakan campuran "Spasi" dan "tab" ditempat sembarangan untuk indentasi
+
+3. **Panjang Baris Kode**
+    - ✅ Do : Batasi panjang baris kode sesuai standar, kalau bisa silahkan dibagi ke beberapa kelas (umumnya 80 - 120 Karakter).
+    - 🚫 Don't : Baris kode terlalu panjang, sulit dibaca dan sulit diperbaiki programmer 
+
+4. **Komentar** 
+    - ✅ Do : Tulis komentar yang jelas, dan perbarui jika logic dan kode berubah
+    - 🚫 Don't : Tidak ada komentar di kode lalu Komentar tidak jelas dan tidak diperbaharui
+
+Mengenali kesalahan umum seperti ini dan berusaha untuk menghindarinya melalui pemahaman yang lebih baik terhadap standar dan penggunaan alat linting adalah langkah penting menuju penulisan kode yang konsisten, mudah dipahami, dan bersih. 
+
+Hal ini tidak hanya mendukung kolaborasi tim yang baik, tetapi juga meningkatkan kualitas dan pemeliharaan kode dalam jangka panjang.    
+<br/>
+<details><summary>© <b>Credits & read-more</b></summary>
+  1. <a href='https://medium.com/koding-kala-weekend/autoloading-di-php-dan-implementasinya-menggunakan-psr-4-3005dd7a09e6'>medium.com - Wahyudi Wibowo - Autoloading di PHP dan Implementasinya menggunakan PSR-4</a>
+  <br/>
+  2. <a href="https://community.algostudio.net/implementasi-psr-4-autoloading-pada-php/"> algostudio.net -Nuzulul Huda - Implementasi PSR 4 Autoloading pada PHP </a>
+  <br/>
+  3. <a href="https://medium.easyread.co/memahami-konsep-psr-4-autoloading-pada-php-ba6cdefe068b">Medium.com - Mohammad Robih - Memahami Konsep PSR-4 Autoloading pada PHP </a>
+</details>
+
+
 <br/>
 
 
