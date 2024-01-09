@@ -767,6 +767,11 @@ git push origin master
 
 Menggunakan Git sejak awal dan melakukan commit dengan pesan yang jelas membantu menerapkan perubahan secara teroganisir dan memudahkan manajemen project
 
+<details><summary>© <b>Credits & read-more</b></summary>
+  1. <a href='https://medium.com/@fahmiprasetiiio/belajar-git-untuk-pemula-7625c686c68f'>medium.com - Fahmi Prasetio - Belajar GIT untuk Pemula
+</a>
+  
+</details>
 
 <br/>
 
