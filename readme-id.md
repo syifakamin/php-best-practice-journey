@@ -16,8 +16,8 @@ Memahami Konsep dasar adalah cara untuk memperkuat pondasi dalam bahasa. ini men
 #### [`Point 1 : Ikuti Coding Standart yang ada`](#point-1️⃣---ikuti-coding-standart-yang-ada)
 Coding Standart adalah pedoman dan aturan penulisan source code yang konsisten. mengikuti standart penulisan source code membantu memperbaiki kerentanan, meningkatkan kerjasama tim, dan meningkatkan keterbacaan kode. 
 
-#### [`Point 2 : Gunakan Version Control System untuk kerjasama`](#)
-asdasdasd
+#### [`Point 2 : Gunakan Version Control System untuk kerjasama`](#point-2️⃣)
+kerjasama adalah , Version control system (VCS) adalah alat yang memungkinkan developer untuk melacak perubahan source kode secara real time. ini memfasilitasi untuk kerjasama tim, pemantauan perubaan dan memulihkan kesalahan ke versi sebelumnya
 
 #### [`Point 3 : Pahami Manajemen Dependency`](#)
 asdasdasd
@@ -663,7 +663,111 @@ Hal ini tidak hanya mendukung kolaborasi tim yang baik, tetapi juga meningkatkan
 <br/>
 
 
-# Point 2️⃣
+# Point 2️⃣ - Manajemen Versi dengan Version Control System (VCS)
+
+Version Control System (VCS) adalah alat yang memungkinkan pengembang untuk melacak perubahan pada kode sumber selama waktu. Ini memfasilitasi kolaborasi tim, pemantauan perubahan, dan pemulihan ke versi sebelumnya.
+
+Git adalah salah satu tool yang sering digunakan dalam pengembangan software. dimana git menjadi tool wajib dikuasai oleh programmer hampir di seluruh dunia.
+
+### Mengenal Git 
+
+Git adalah salah satu _Version Control System_ Tugasnya mencata setiap perubahan pada file project yang dikerjakan oleh banyak orang maupun sendiri. 
+
+Git dikenal juga dengan VCS terdistribusi, dimana penyimpanan database git tidak hanya di satu tempat saja. 
+
+Dengan menggunakan git semua orang yang terlibar dalam menulis _source code_ akan menyimpan ke database git, sehingga sangat memudahkan dalam mengelola proyek baik online maupun offline. 
+
+Dengan kata lain git sebenarnya bertugas memantau semua perubahan yang terjadi pada file project dan menyimpan ke databasenya
+
+Git hanya akan menyimpan delta perubahannya saja, Git tidak akan menyimpan seluruh isi file yang akan memakan banyak memori, dan Git memungkinkan untuk bisa kembali ke file versi sebelumnya yang kita inginkan.
+
+selain itu, beberapa manfaat git yang akan dirasakan jika kita menguasainnya adalah:
+
+1. Bisa menyimpan seluruh versi _source code_.
+
+2. Bisa paham cara kolaborasi dalam project.
+
+3. Bisa ikut berkontribusi ke project _open source_.
+
+4. Lebih aman digunakan untuk kolaborasi.
+
+5. Bisa mengerti cara _deploy_ aplikasi modern
+
+### Instalasi dan Konfigurasi Awal GIT
+
+Setelah kenalan dengan Git, selanjutnya mari kita belajar langkah langkah untuk memasang dan mengkonfigurasi GIT
+
+pertama, kita harus install Git terlebih dahulu. bisa download Git disini <a href="https://git-scm.com/">DOWNLOAD GIT </a>
+
+Setelah Git terinstall, ada beberapa konfigurasi yang harus dilakukan sebelum mulai menggunakan Git. Lakukan konfigurasi seperti ini :
+
+```bash
+git config --global user.name "username anda tanpa tanda petik"
+git config --global user.email "email anda tanpa tanda petik"
+```
+
+lalu periksa konfigurasinya dengan perintah :
+
+```bash
+git config --list
+```
+
+jika kamu memiliki akun _Github, Gitlab, BitBucket_ maka _username_ dan _Email_ haru mengikuti akun tersebut agar mudah terintegrasi.
+
+### Buat Repository dalam Project
+
+Repositori (_Repository_) dalam bahasa indoesia artinya gudang. repositori adalah istilah yang digunakan untuk direktori project yang menggunakan Git.
+
+#### Membuat Repositori
+
+Membuat Repositori dapat dilakukan dengan perintah `git init` 
+
+```bash
+cd "nama folder project anda"
+git init
+```
+
+setelah itu lihat dalam folder yang akan direpo, disitu ada 1 folder bernama **.git** . selanjutnya ketik perintah dibawah
+
+```bash
+Git remote add origin https://github.com/(username anda tanpa tanda kurung)/(Folder-proyek anda tanpa tanda kurung).git
+Git push -u origin master
+```
+
+setelah itu check repository, pada akun github, File repo anda apakah sudah terisi sesuai yang diinginkan. jika sudah. lanjut ke step revisi.
+
+
+### Simpan perubahan revisi dengan Git Commit
+
+ketika sudah upload file kita, akan tetapi ada sebuah atau beberapa file yang belum ikut ke upload atau dala project kita ingin menambahkan kode. kita bisa revisi tanpa harus menghapus daata sebelumnya kemudina mengupload lagi. caranya seperti ini:
+
+Pertama silahkan ketik perintah `git add .` untuk menambahkan semua file
+
+```
+git add .
+```
+
+setelah itu, cobalah ketik perintah `git status`
+
+```
+git status
+```
+
+setelah itu, ubah kondisi file ke `commited` agar semua perubahan disimpan oleh git dengan cara seperti ini:
+
+```
+git commit -m "(Pesan komit anda tanpa tanda kurung)"
+```
+
+setelah itu, kirim file ke server dengan perintah seperti ini :
+
+```
+git push origin master
+```
+
+Menggunakan Git sejak awal dan melakukan commit dengan pesan yang jelas membantu menerapkan perubahan secara teroganisir dan memudahkan manajemen project
+
+
 <br/>
 
 # Point 3️⃣
